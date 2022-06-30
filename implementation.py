@@ -1,6 +1,4 @@
-from enum import Enum
-
-from types import HelloService, SeverityEnum, ByeService, Logger
+from _types import HelloService, SeverityEnum, ByeService, Logger
 
 
 class App:
