@@ -1,16 +1,17 @@
 from datetime import datetime
 
-from punq import Container
+from punq import Container, Scope
 
-from implementation import ConsoleLogger, App, LogHelloService, LogByeService
-from _types import Logger, HelloService, ByeService
+from implementation import ConsoleLogger, App, LogHelloService, LogByeService, ConsoleUserInputService, RequestState
+from _types import Logger, HelloService, ByeService, UserInputService
 
 container = Container()
 
-print(f"{datetime.now()}")
 container.register(App)
+container.register(RequestState, scope=Scope.singleton)
 container.register(Logger, ConsoleLogger)
+container.register(UserInputService, ConsoleUserInputService)
 container.register(HelloService, LogHelloService)
 container.register(ByeService, LogByeService)
-container.resolve(App).run()
-print(f"{datetime.now()}")
+while True:
+    container.resolve(App).run()
